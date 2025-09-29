@@ -43,7 +43,8 @@ td, th {
 }
 
 tr:nth-child(even) {
-  background-color: #dddddd;
+  /* background-color: #dddddd; */
+  background-color: grey;
 }
 
 .delete-card {
@@ -138,7 +139,9 @@ body[data-theme="dark"] {
   background: #121212;
   color: #ffffff;
 }
-
+.delete-card {
+    color: black;
+}
 button {
   padding: 8px 16px;
   margin: 10px;

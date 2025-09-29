@@ -10,11 +10,11 @@
 <body>
 
   <!-- Theme toggle button (available everywhere) -->
-  <button id="theme-toggle" class="btn">🌙 Toggle Theme</button>
+  <!-- <button id="theme-toggle" class="btn">🌙 Toggle Theme</button> -->
 
   {% block content %}{% endblock %}
 
-  <script>
+  <!-- <script>
     const toggleBtn = document.getElementById("theme-toggle");
     toggleBtn.addEventListener("click", () => {
       document.body.dataset.theme =
@@ -22,6 +22,27 @@
       // Save preference
       localStorage.setItem("theme", document.body.dataset.theme);
     });
+
+    // Load saved theme on refresh
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      document.body.dataset.theme = savedTheme;
+    } else {
+      document.body.dataset.theme = "light";
+    }
+  </script> -->
+
+
+    <script>
+    const toggleBtn = document.getElementById("theme-toggle");
+    if (toggleBtn) {   // ✅ only attach if button exists
+      toggleBtn.addEventListener("click", () => {
+        document.body.dataset.theme =
+          document.body.dataset.theme === "dark" ? "light" : "dark";
+        // Save preference
+        localStorage.setItem("theme", document.body.dataset.theme);
+      });
+    }
 
     // Load saved theme on refresh
     const savedTheme = localStorage.getItem("theme");
