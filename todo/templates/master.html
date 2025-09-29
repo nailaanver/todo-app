@@ -1,0 +1,35 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Task App{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+
+  <!-- Theme toggle button (available everywhere) -->
+  <button id="theme-toggle" class="btn">🌙 Toggle Theme</button>
+
+  {% block content %}{% endblock %}
+
+  <script>
+    const toggleBtn = document.getElementById("theme-toggle");
+    toggleBtn.addEventListener("click", () => {
+      document.body.dataset.theme =
+        document.body.dataset.theme === "dark" ? "light" : "dark";
+      // Save preference
+      localStorage.setItem("theme", document.body.dataset.theme);
+    });
+
+    // Load saved theme on refresh
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      document.body.dataset.theme = savedTheme;
+    } else {
+      document.body.dataset.theme = "light";
+    }
+  </script>
+</body>
+</html>

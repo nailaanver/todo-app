@@ -1,0 +1,28 @@
+{% extends 'master.html' %}
+{% load static %}
+{% block title  %} my task {% endblock %}
+
+{% block content %}
+
+<!-- <link rel="stylesheet" href="{% static 'css/delete.css' %}"> -->
+
+<div class="delete-card">
+    <h2>Delete Task Confirmation</h2>
+    <p class="confirm-text">Are you sure you want to delete this task?</p>
+
+    <div class="task-details">
+        <p><strong>ID:</strong> {{ task.id }}</p>
+        <p><strong>Task:</strong> {{ task.task }}</p>
+        <p><strong>Status:</strong> {{ task.status }}</p>
+        <p><strong>Created Date:</strong> {{ task.created_date }}</p>
+        <p><strong>Due Date:</strong> {{ task.due_date }}</p>
+    </div>
+
+    <form method="POST" class="btn-group">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+        <a href="{% url 'index' %}" class="btn btn-cancel">Cancel</a>
+    </form>
+</div>
+
+{% endblock %}

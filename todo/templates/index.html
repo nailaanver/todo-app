@@ -1,0 +1,66 @@
+{% extends 'master.html' %}
+{% load static %}
+
+
+{% block content %}
+    <h1>MY TO DO LIST</h1>
+    
+    <div class="add-btn-sec">
+     <a href="add/">
+  <button class="add-task">+ Add Task</button>
+</a></div>
+    <table class="tab" cellpadding="8" cellspacing="0">
+        <tr>
+            <th>id</th>
+            <th>Task</th>
+            <th>Status</th>
+            <th>Created Date</th>
+            <th>Due Date</th>
+            <th >Actions</th>
+
+        </tr>
+        {% for x in mymembers %}
+                <tr>
+            <td>{{x.id}}</td>
+            <td>{{ x.task }}</td>
+            <td class="select">{% if x.status == 'pending' %}
+            <span style="color: #FFD700; font-family: 'Montserrat';">Pending</span>
+            {% else %}
+            <span style="color: green; font-family: 'Montserrat';">Completed</span>
+            {% endif %}
+            
+            </td>
+            <td>{{ x.created_date }}</td>
+            <!-- <td>{{x.due_date }}
+                {% if x.due_date|date:"Y-m-d" == today|date:"Y-m-d" %}
+                <span style="color:orange;">Due Today</span>
+                {% else %}
+                <span style="color:red;">Overdue</span>
+                {% endif %}
+              
+
+                
+            </td> -->
+
+            <td>
+    {{ x.due_date }}
+    {% if x.status == "pending" %}
+        {% if x.due_date|date:"Y-m-d" == today|date:"Y-m-d" %}
+            <span style="color:orange; font-weight:bold;">(Due Today)</span>
+        {% elif x.due_date < today %}
+            <span style="color:red; font-weight:bold;">(Overdue)</span>
+        {% endif %}
+    {% endif %}
+</td>
+
+            <td>           
+            <a href="delete/{{ x.id }}"><button class="btn-delete">Delete</button></a>
+            <a href="update/{{ x.id }}"><button class="btn-update">Update</button></a>
+
+            </td>
+        </tr>
+
+        {% endfor %}
+    </table>
+    
+{% endblock %}
